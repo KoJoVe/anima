@@ -25259,6 +25259,8 @@ ion-item.clear-label {
 
 ion-item.clear-label .item-inner {
   border-bottom: 1px white solid !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
 }
 
 ion-item.clear-label .item-inner ion-label,
@@ -25370,6 +25372,7 @@ page-main .single-story {
   background: linear-gradient(135deg, rgba(64, 170, 255, 0.9) 0%, rgba(126, 97, 255, 0.9) 100%);
   width: 100%;
   height: 100%;
+  padding-bottom: 50px;
   position: absolute;
   top: 0;
   left: 0;
@@ -25417,13 +25420,14 @@ page-main .eye {
   width: 20%;
   float: left;
   text-align: center;
+  height: 100%;
+  position: relative;
 }
 
 page-main .eye .openeye {
-  width: 80%;
-  height: 80%;
+  width: 9vh;
   margin: auto;
-  margin-top: 4%;
+  margin-top: 0%;
 }
 
 page-main .eye .openeye img {
@@ -25433,6 +25437,9 @@ page-main .eye .openeye img {
 page-main .eye .distance {
   margin: 0;
   color: white;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 page-main .text {
