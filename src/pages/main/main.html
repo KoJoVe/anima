@@ -1,0 +1,42 @@
+<ion-content padding>
+
+  <div *ngIf="storySelected > -1" class="single-story">
+
+    <img src="../../assets/img/olhoaberto.png" class="logo" />
+    <p class="subtitle">{{stories[storySelected].name}} está a {{stories[storySelected].distance}}m</p>
+
+    <div class="story-text">
+      {{stories[storySelected].story}}
+    </div>
+
+    <button class="normal-button" (tap)="storySelected = -1" ion-button color="light" clear>Fechar</button>
+
+  </div>
+
+  <div class="top-bar">
+    <ion-icon (tap)="goToProfile()" class="top-icon-right" name="ios-cog-outline"></ion-icon>
+  </div>
+
+  <p class="title">
+    Histórias
+  </p>
+
+  <div class="stories">
+    <div *ngFor="let story of stories; let i = index" class="story">
+      <div class="eye">
+        <div class="openeye">
+          <img src="../../assets/img/olhoaberto.png" class="openeye" />
+        </div>
+        <p class="distance">90m</p>
+      </div>
+      <div (tap)="openStory(i)" class="text">
+        <span>{{cutString(story.story)}}...</span>
+        <br />
+        -José
+      </div>
+    </div>
+  </div>
+
+  <button class="big-button" (tap)="goToNew()" ion-button color="light" clear>Contar Uma História</button>
+
+</ion-content>

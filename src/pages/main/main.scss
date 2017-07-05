@@ -1,0 +1,94 @@
+page-main {
+
+  .single-story {
+    background: linear-gradient(135deg, rgba(64,170,255,0.9) 0%, rgba(126,97,255,0.9) 100%);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+  }
+
+  .logo {
+    margin-top: 4vh;
+  }
+
+  .subtitle {
+    color: white;
+  }
+
+  .story-text {
+    margin: auto;
+    width: 90%;
+    height: 62vh;
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 18px;
+    overflow: scroll;
+    text-align: justify;
+    text-justify: inter-word;
+    color: #4990E2;
+  }
+
+  .normal-button {
+    margin-top: 2vh;
+  }
+
+  .stories {
+    height: 64.9vh;
+    overflow: scroll;
+    margin-top: 7vh;
+  }
+
+  .story {
+    height: 11vh;
+    margin-bottom: 2vh;
+  }
+
+  .eye {
+    width: 20%;
+    float: left;
+    text-align: center;
+
+    .openeye {
+      width: 80%;
+      height: 80%;
+      margin: auto;
+      margin-top: 4%;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .distance {
+      margin: 0;
+      color: white;
+    }
+  }
+
+  .text {
+    background: white;
+    width: 80%;
+    float: right;
+    height: 100%;
+    border-radius: 10px;
+    color: #4990E2;
+    text-align: left;
+    padding: 3.3%;
+    font-size: 1.7vh;
+    text-align: justify;
+    text-justify: inter-word;
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  ion-content .big-button {
+    margin-top: 2vh;
+  }
+
+}

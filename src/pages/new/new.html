@@ -1,0 +1,25 @@
+<ion-content padding>
+
+  <div class="top-bar">
+    <ion-icon (tap)="back()" class="top-icon-left" name="md-arrow-back"></ion-icon>
+  </div>
+
+  <p class="title">
+    Contar História
+  </p>
+
+  <div class="story">
+    <textarea></textarea>
+  </div>
+
+  <div class="send">
+    <div class="eye">
+      <img src="../../assets/img/olhoaberto.png" class="logo" />
+      <img src="../../assets/img/balls.png" class="balls" />
+    </div>
+    <div class="send-button">
+      <button class="big-button" (tap)="send()" ion-button color="light" clear>Enviar</button>
+    </div>
+  </div>
+
+</ion-content>

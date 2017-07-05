@@ -1,0 +1,39 @@
+<ion-content padding>
+
+  <div class="top-bar">
+    <ion-icon (tap)="back()" class="top-icon-left" name="md-arrow-back"></ion-icon>
+  </div>
+
+  <img src="../../assets/img/olho.png" class="logo" />
+
+  <p class="title">
+    Perfil
+  </p>
+
+  <ion-item class="clear-label">
+   <ion-label floating>email</ion-label>
+   <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <ion-item class="clear-label">
+   <ion-label floating>nome</ion-label>
+   <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <ion-item class="clear-label">
+   <ion-label floating>nova senha</ion-label>
+   <ion-input type="password"></ion-input>
+  </ion-item>
+
+  <!-- <ion-item class="clear-label">
+   <ion-label floating>confirmar nova senha</ion-label>
+   <ion-input type="password"></ion-input>
+  </ion-item> -->
+
+  <button class="big-button" (tap)="goToStories()" ion-button color="light" clear>Ver Minhas Histórias</button>
+
+  <br />
+
+  <button class="normal-button" (tap)="quit()" ion-button color="light" clear>Sair do App</button>
+
+</ion-content>

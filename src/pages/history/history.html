@@ -1,0 +1,35 @@
+<ion-content padding>
+
+  <div *ngIf="storySelected > -1" class="single-story">
+
+    <img src="../../assets/img/olhoaberto.png" class="logo" />
+    <p class="subtitle">Contada 01/01/1970</p>
+
+    <div class="story-text">
+      {{stories[storySelected].story}}
+    </div>
+
+    <button class="normal-button" (tap)="storySelected = -1" ion-button color="light" clear>Fechar</button>
+
+  </div>
+
+  <div class="top-bar">
+    <ion-icon (tap)="back()" class="top-icon-left" name="md-arrow-back"></ion-icon>
+  </div>
+
+  <p class="title">
+    Suas Histórias
+  </p>
+
+  <div class="stories">
+    <div *ngFor="let story of stories; let i = index" class="story">
+      <div (tap)="openStory(i)" class="text">
+        {{cutString(story.story)}}...
+      </div>
+      <div class="close">
+        <ion-icon (tap)="deleteStory(i)" class="close-icon" name="md-close"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,14 +1,23 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
+
+  <img src="../../assets/img/olho.png" class="logo" />
+
+  <p class="title">
+    anima
   </p>
+
+  <ion-item class="clear-label email-label">
+   <ion-label floating>email</ion-label>
+   <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <ion-item class="clear-label">
+   <ion-label floating>senha</ion-label>
+   <ion-input type="password"></ion-input>
+  </ion-item>
+
+  <button class="normal-button login-button" ion-button color="light" (tap)="goToMain()" clear>Login</button>
+  <br />
+  <button class="normal-button" ion-button color="light" (tap)="goToRegister()" clear>Cadastrar-Se</button>
+
 </ion-content>
