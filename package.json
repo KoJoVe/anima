@@ -10,8 +10,8 @@
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "start": "http-server",
-    "preinstall": "npm install -g http-server"
+    "start": "npm run build && node server.js",
+    "preinstall": "npm install -g express"
   },
   "dependencies": {
     "@angular/common": "4.1.3",
