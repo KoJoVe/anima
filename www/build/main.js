@@ -27565,7 +27565,7 @@ function Item_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_alert_alert__ = __webpack_require__(57);
 /* unused harmony reexport Alert */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_alert_alert_controller__ = __webpack_require__(113);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_6__components_alert_alert_controller__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_6__components_alert_alert_controller__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_alert_alert_component__ = __webpack_require__(56);
 /* unused harmony reexport AlertCmp */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_app_app__ = __webpack_require__(6);
@@ -27783,11 +27783,11 @@ function Item_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_112__navigation_ionic_page__ = __webpack_require__(236);
 /* unused harmony reexport IonicPage */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_113__navigation_nav_controller__ = __webpack_require__(22);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_113__navigation_nav_controller__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_113__navigation_nav_controller__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_114__navigation_nav_controller_base__ = __webpack_require__(47);
 /* unused harmony reexport NavControllerBase */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_115__navigation_nav_params__ = __webpack_require__(14);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_115__navigation_nav_params__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_115__navigation_nav_params__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_116__navigation_nav_util__ = __webpack_require__(23);
 /* unused harmony reexport DeepLinkMetadata */
 /* unused harmony reexport DeepLinkMetadataFactory */
@@ -45858,6 +45858,23 @@ var StoriesProvider = (function () {
             });
         });
     };
+    StoriesProvider.prototype.getCurrentUserStories = function () {
+        return new Promise(function (resolve, reject) {
+            var user = firebase.auth().currentUser;
+            firebase.database().ref('/stories/' + user.uid + '/').once('value').then(function (snapshot) {
+                var stories = [];
+                var userStories = snapshot.val();
+                if (userStories != null) {
+                    for (var i in userStories) {
+                        stories.push({ id: userStories[i].sid, author: userStories[i].author, story: userStories[i].story });
+                    }
+                }
+                resolve(stories);
+            }, function (error) {
+                reject(error.message);
+            });
+        });
+    };
     StoriesProvider.prototype.deleteStory = function (story) {
         return new Promise(function (resolve, reject) {
         });
@@ -45866,9 +45883,10 @@ var StoriesProvider = (function () {
 }());
 StoriesProvider = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], StoriesProvider);
 
+var _a;
 //# sourceMappingURL=stories.js.map
 
 /***/ }),
@@ -58789,6 +58807,7 @@ webpackEmptyAsyncContext.id = 102;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HistoryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_stories_stories__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58800,49 +58819,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var HistoryPage = (function () {
-    function HistoryPage(navCtrl, navParams, alertCtrl) {
+    function HistoryPage(alertCtrl, navCtrl, navParams, storiesProvider) {
+        var _this = this;
+        this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.alertCtrl = alertCtrl;
+        this.storiesProvider = storiesProvider;
         this.storySelected = -1;
-        this.stories = [
-            {
-                name: "José",
-                story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-                distance: 40,
-            },
-            {
-                name: "José",
-                story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-                distance: 40,
-            },
-            {
-                name: "José",
-                story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-                distance: 40,
-            },
-            {
-                name: "José",
-                story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-                distance: 40,
-            },
-            {
-                name: "José",
-                story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-                distance: 40,
-            },
-            {
-                name: "José",
-                story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-                distance: 40,
-            },
-            {
-                name: "José",
-                story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-                distance: 40,
-            }
-        ];
+        this.stories = [];
+        storiesProvider.getCurrentUserStories().then(function (response) {
+            _this.stories = response;
+        }, function (error) {
+            var alert = _this.alertCtrl.create({
+                title: 'Erro',
+                message: error,
+                buttons: [{ text: 'Ok', role: 'cancel', handler: function () { } }]
+            });
+            alert.present();
+        });
     }
     HistoryPage.prototype.ionViewDidLoad = function () {
         // console.log('ionViewDidLoad HistoryPage');
@@ -58884,9 +58880,10 @@ HistoryPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
         selector: 'page-history',template:/*ion-inline-start:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/history/history.html"*/'<ion-content padding>\n\n  <div *ngIf="storySelected > -1" class="single-story">\n\n    <img src="../../assets/img/olhoaberto.png" class="logo" />\n    <p class="subtitle">Contada 01/01/1970</p>\n\n    <div class="story-text">\n      {{stories[storySelected].story}}\n    </div>\n\n    <button class="normal-button" (tap)="storySelected = -1" ion-button color="light" clear>Fechar</button>\n\n  </div>\n\n  <div class="top-bar">\n    <ion-icon (tap)="back()" class="top-icon-left" name="md-arrow-back"></ion-icon>\n  </div>\n\n  <p class="title">\n    Suas Histórias\n  </p>\n\n  <div class="stories">\n    <div *ngFor="let story of stories; let i = index" class="story">\n      <div (tap)="openStory(i)" class="text">\n        {{cutString(story.story)}}...\n      </div>\n      <div class="close">\n        <ion-icon (tap)="deleteStory(i)" class="close-icon" name="md-close"></ion-icon>\n      </div>\n    </div>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/history/history.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* AlertController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* AlertController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_stories_stories__["a" /* StoriesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_stories_stories__["a" /* StoriesProvider */]) === "function" && _d || Object])
 ], HistoryPage);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=history.js.map
 
 /***/ }),
@@ -58957,7 +58954,7 @@ HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/home/home.html"*/'<ion-content padding>\n\n  <img src="../../assets/img/olho.png" class="logo" />\n\n  <p class="title">\n    anima\n  </p>\n\n  <ion-item class="clear-label email-label">\n   <ion-label floating>email</ion-label>\n   <ion-input [(ngModel)]="user.email" type="email"></ion-input>\n  </ion-item>\n\n  <ion-item class="clear-label">\n   <ion-label floating>senha</ion-label>\n   <ion-input [(ngModel)]="user.password" type="password"></ion-input>\n  </ion-item>\n\n  <button class="normal-button login-button" ion-button color="light" (tap)="login()" clear>Login</button>\n  <br />\n  <button class="normal-button" ion-button color="light" (tap)="goToRegister()" clear>Cadastrar-Se</button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__providers_users_users__["a" /* UsersProvider */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__providers_users_users__["a" /* UsersProvider */]])
 ], HomePage);
 
 //# sourceMappingURL=home.js.map
@@ -59036,7 +59033,7 @@ MainPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
         selector: 'page-main',template:/*ion-inline-start:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/main/main.html"*/'<ion-content padding>\n\n  <div *ngIf="storySelected > -1" class="single-story">\n\n    <img src="../../assets/img/olhoaberto.png" class="logo" />\n    <p class="subtitle">{{stories[storySelected].name}} está a {{stories[storySelected].distance}}m</p>\n\n    <div class="story-text">\n      {{stories[storySelected].story}}\n    </div>\n\n    <button class="normal-button" (tap)="storySelected = -1" ion-button color="light" clear>Fechar</button>\n\n  </div>\n\n  <div class="top-bar">\n    <ion-icon (tap)="goToProfile()" class="top-icon-right" name="ios-settings-outline"></ion-icon>\n  </div>\n\n  <p class="title">\n    Histórias\n  </p>\n\n  <div class="stories">\n    <div *ngFor="let story of stories; let i = index" class="story">\n      <div class="eye">\n        <div class="openeye">\n          <img src="../../assets/img/olhoaberto.png" class="openeye" />\n        </div>\n        <p class="distance">{{story.distance}}m</p>\n      </div>\n      <div (tap)="openStory(i)" class="text">\n        <span>{{cutString(story.story)}}...</span>\n        <br />\n        -{{story.author}}\n      </div>\n    </div>\n  </div>\n\n  <button class="big-button" (tap)="goToNew()" ion-button color="light" clear>Contar Uma História</button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/main/main.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_stories_stories__["a" /* StoriesProvider */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_stories_stories__["a" /* StoriesProvider */]])
 ], MainPage);
 
 //# sourceMappingURL=main.js.map
@@ -59102,7 +59099,7 @@ NewPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
         selector: 'page-new',template:/*ion-inline-start:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/new/new.html"*/'<ion-content padding>\n\n  <div class="top-bar">\n    <ion-icon (tap)="back()" class="top-icon-left" name="md-arrow-back"></ion-icon>\n  </div>\n\n  <p class="title">\n    Contar História\n  </p>\n\n  <div class="story">\n    <textarea [(ngModel)]=\'storyContent\'></textarea>\n  </div>\n\n  <div class="send">\n    <div class="eye">\n      <img src="../../assets/img/olhoaberto.png" class="logo" />\n      <img src="../../assets/img/balls.png" class="balls" />\n    </div>\n    <div class="send-button">\n      <button class="big-button" (tap)="send()" ion-button color="light" clear>Enviar</button>\n    </div>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/new/new.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_stories_stories__["a" /* StoriesProvider */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_stories_stories__["a" /* StoriesProvider */]])
 ], NewPage);
 
 //# sourceMappingURL=new.js.map
@@ -59168,7 +59165,7 @@ ProfilePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
         selector: 'page-profile',template:/*ion-inline-start:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/profile/profile.html"*/'<ion-content padding>\n\n  <div class="top-bar">\n    <ion-icon (tap)="back()" class="top-icon-left" name="md-arrow-back"></ion-icon>\n  </div>\n\n  <img src="../../assets/img/olho.png" class="logo" />\n\n  <p class="title">\n    Perfil\n  </p>\n\n  <ion-item class="clear-label">\n   <ion-label floating>nome</ion-label>\n   <ion-input [(ngModel)]="user.displayName" type="text"></ion-input>\n  </ion-item>\n\n  <!-- <ion-item class="clear-label">\n   <ion-label floating>nova senha</ion-label>\n   <ion-input type="password"></ion-input>\n  </ion-item> -->\n\n  <!-- <ion-item class="clear-label">\n   <ion-label floating>confirmar nova senha</ion-label>\n   <ion-input type="password"></ion-input>\n  </ion-item> -->\n\n  <button class="big-button" (tap)="goToStories()" ion-button color="light" clear>Ver Minhas Histórias</button>\n\n  <br />\n\n  <button class="normal-button" (tap)="quit()" ion-button color="light" clear>Sair do App</button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/profile/profile.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_users_users__["a" /* UsersProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* AlertController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_users_users__["a" /* UsersProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* AlertController */]])
 ], ProfilePage);
 
 //# sourceMappingURL=profile.js.map
@@ -59245,7 +59242,7 @@ RegisterPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
         selector: 'page-register',template:/*ion-inline-start:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/register/register.html"*/'<ion-content padding>\n\n  <div class="top-bar">\n    <ion-icon (tap)="back()" class="top-icon-left" name="md-arrow-back"></ion-icon>\n  </div>\n\n  <img src="../../assets/img/olho.png" class="logo" />\n\n  <p class="title">\n    Cadastro\n  </p>\n\n  <ion-item class="clear-label">\n   <ion-label floating>email</ion-label>\n   <ion-input [(ngModel)]="user.email" type="text"></ion-input>\n  </ion-item>\n\n  <ion-item class="clear-label">\n   <ion-label floating>nome</ion-label>\n   <ion-input [(ngModel)]="user.displayName" type="text"></ion-input>\n  </ion-item>\n\n  <ion-item class="clear-label">\n   <ion-label floating>senha</ion-label>\n   <ion-input [(ngModel)]="user.password" type="password"></ion-input>\n  </ion-item>\n\n  <ion-item class="clear-label">\n   <ion-label floating>confirmar senha</ion-label>\n   <ion-input [(ngModel)]="confirmation" type="password"></ion-input>\n  </ion-item>\n\n  <button (click)="register()" class="normal-button" ion-button color="light" clear>Cadastrar</button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/JoaoVicente/Desktop/Deev/Repositorios/Anima/src/pages/register/register.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_users_users__["a" /* UsersProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* AlertController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_users_users__["a" /* UsersProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* AlertController */]])
 ], RegisterPage);
 
 //# sourceMappingURL=register.js.map
