@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams } from 'ionic-angular';
+
+import { UsersProvider } from '../../providers/users/users';
 
 import { HistoryPage } from '../history/history'
+
+declare var firebase;
 
 @Component({
   selector: 'page-profile',
@@ -9,7 +13,10 @@ import { HistoryPage } from '../history/history'
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  user: any = {};
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public usersProvider: UsersProvider, public alertCtrl: AlertController) {
+    this.user = firebase.auth().currentUser;
   }
 
   ionViewDidLoad() {
@@ -25,7 +32,17 @@ export class ProfilePage {
   }
 
   quit() {
-    this.navCtrl.popTo(this.navCtrl.getByIndex(0));
+    this.usersProvider.logout().then(() => {
+      this.navCtrl.popTo(this.navCtrl.getByIndex(0));
+    }, (error) => {
+      let alert = this.alertCtrl.create({
+        title: 'Erro',
+        message: error,
+        buttons: [{text: 'Ok',role: 'cancel',handler: () => {}}]
+      });
+      alert.present();
+      return;
+    });
   }
 
 }

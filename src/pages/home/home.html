@@ -8,15 +8,15 @@
 
   <ion-item class="clear-label email-label">
    <ion-label floating>email</ion-label>
-   <ion-input type="text"></ion-input>
+   <ion-input [(ngModel)]="user.email" type="text"></ion-input>
   </ion-item>
 
   <ion-item class="clear-label">
    <ion-label floating>senha</ion-label>
-   <ion-input type="password"></ion-input>
+   <ion-input [(ngModel)]="user.password" type="password"></ion-input>
   </ion-item>
 
-  <button class="normal-button login-button" ion-button color="light" (tap)="goToMain()" clear>Login</button>
+  <button class="normal-button login-button" ion-button color="light" (tap)="login()" clear>Login</button>
   <br />
   <button class="normal-button" ion-button color="light" (tap)="goToRegister()" clear>Cadastrar-Se</button>
 

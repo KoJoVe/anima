@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams } from 'ionic-angular';
 
 import { StoriesProvider } from '../../providers/stories/stories';
 
@@ -13,46 +13,56 @@ import { NewPage } from '../new/new'
 export class MainPage {
 
   storySelected = -1;
+  stories = [];
+  // stories = [
+  //   {
+  //     name: "José",
+  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla",
+  //     distance: 40,
+  //   },
+  //   {
+  //     name: "José",
+  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
+  //     distance: 40,
+  //   },
+  //   {
+  //     name: "José",
+  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
+  //     distance: 40,
+  //   },
+  //   {
+  //     name: "José",
+  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
+  //     distance: 40,
+  //   },
+  //   {
+  //     name: "José",
+  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
+  //     distance: 40,
+  //   },
+  //   {
+  //     name: "José",
+  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
+  //     distance: 40,
+  //   },
+  //   {
+  //     name: "José",
+  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
+  //     distance: 40,
+  //   }
+  // ]
 
-  stories = [
-    {
-      name: "José",
-      story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-      distance: 40,
-    },
-    {
-      name: "José",
-      story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-      distance: 40,
-    },
-    {
-      name: "José",
-      story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-      distance: 40,
-    },
-    {
-      name: "José",
-      story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-      distance: 40,
-    },
-    {
-      name: "José",
-      story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-      distance: 40,
-    },
-    {
-      name: "José",
-      story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-      distance: 40,
-    },
-    {
-      name: "José",
-      story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-      distance: 40,
-    }
-  ]
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storiesProvider: StoriesProvider) {
+  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public storiesProvider: StoriesProvider) {
+    storiesProvider.getStories().then( (response : any[]) => {
+      this.stories = response;
+    } , (error) => {
+      let alert = this.alertCtrl.create({
+        title: 'Erro',
+        message: error,
+        buttons: [{text: 'Ok',role: 'cancel', handler: () => {}}]
+      });
+      alert.present();
+    });
   }
 
   ionViewDidLoad() {

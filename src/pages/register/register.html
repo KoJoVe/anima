@@ -12,24 +12,24 @@
 
   <ion-item class="clear-label">
    <ion-label floating>email</ion-label>
-   <ion-input type="text"></ion-input>
+   <ion-input [(ngModel)]="user.email" type="text"></ion-input>
   </ion-item>
 
   <ion-item class="clear-label">
    <ion-label floating>nome</ion-label>
-   <ion-input type="text"></ion-input>
+   <ion-input [(ngModel)]="user.displayName" type="text"></ion-input>
   </ion-item>
 
   <ion-item class="clear-label">
    <ion-label floating>senha</ion-label>
-   <ion-input type="password"></ion-input>
+   <ion-input [(ngModel)]="user.password" type="password"></ion-input>
   </ion-item>
 
   <ion-item class="clear-label">
    <ion-label floating>confirmar senha</ion-label>
-   <ion-input type="password"></ion-input>
+   <ion-input [(ngModel)]="confirmation" type="password"></ion-input>
   </ion-item>
 
-  <button class="normal-button" ion-button color="light" clear>Cadastrar</button>
+  <button (click)="register()" class="normal-button" ion-button color="light" clear>Cadastrar</button>
 
 </ion-content>

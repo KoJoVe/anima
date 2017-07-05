@@ -11,19 +11,14 @@
   </p>
 
   <ion-item class="clear-label">
-   <ion-label floating>email</ion-label>
-   <ion-input type="text"></ion-input>
-  </ion-item>
-
-  <ion-item class="clear-label">
    <ion-label floating>nome</ion-label>
-   <ion-input type="text"></ion-input>
+   <ion-input [(ngModel)]="user.displayName" type="text"></ion-input>
   </ion-item>
 
-  <ion-item class="clear-label">
+  <!-- <ion-item class="clear-label">
    <ion-label floating>nova senha</ion-label>
    <ion-input type="password"></ion-input>
-  </ion-item>
+  </ion-item> -->
 
   <!-- <ion-item class="clear-label">
    <ion-label floating>confirmar nova senha</ion-label>
