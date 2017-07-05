@@ -25371,8 +25371,7 @@ page-home ion-content .login-button {
 page-main .single-story {
   background: linear-gradient(135deg, rgba(64, 170, 255, 0.9) 0%, rgba(126, 97, 255, 0.9) 100%);
   width: 100%;
-  height: 100%;
-  padding-bottom: 50px;
+  height: 110%;
   position: absolute;
   top: 0;
   left: 0;
@@ -25425,7 +25424,7 @@ page-main .eye {
 }
 
 page-main .eye .openeye {
-  width: 9vh;
+  width: 8vh;
   margin: auto;
   margin-top: 0%;
 }
