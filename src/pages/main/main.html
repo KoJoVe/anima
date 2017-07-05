@@ -27,12 +27,12 @@
         <div class="openeye">
           <img src="../../assets/img/olhoaberto.png" class="openeye" />
         </div>
-        <p class="distance">90m</p>
+        <p class="distance">{{story.distance}}m</p>
       </div>
       <div (tap)="openStory(i)" class="text">
         <span>{{cutString(story.story)}}...</span>
         <br />
-        -José
+        -{{story.author}}
       </div>
     </div>
   </div>

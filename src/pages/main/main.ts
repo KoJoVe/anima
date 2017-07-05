@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 
 import { StoriesProvider } from '../../providers/stories/stories';
 
@@ -14,46 +15,13 @@ export class MainPage {
 
   storySelected = -1;
   stories = [];
-  // stories = [
-  //   {
-  //     name: "José",
-  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-  //     distance: 40,
-  //   },
-  //   {
-  //     name: "José",
-  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-  //     distance: 40,
-  //   },
-  //   {
-  //     name: "José",
-  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-  //     distance: 40,
-  //   },
-  //   {
-  //     name: "José",
-  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-  //     distance: 40,
-  //   },
-  //   {
-  //     name: "José",
-  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-  //     distance: 40,
-  //   },
-  //   {
-  //     name: "José",
-  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-  //     distance: 40,
-  //   },
-  //   {
-  //     name: "José",
-  //     story: "Blabalba lablab labalba labl ablab alabablaba lbal balabla",
-  //     distance: 40,
-  //   }
-  // ]
 
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public storiesProvider: StoriesProvider) {
-    storiesProvider.getStories().then( (response : any[]) => {
+  constructor(public alertCtrl: AlertController, public platform: Platform, public navCtrl: NavController, public navParams: NavParams, public storiesProvider: StoriesProvider) {
+    this.getUpdateStoriesFeed();
+  }
+
+  getUpdateStoriesFeed() {
+    this.storiesProvider.getStories().then( (response : any[]) => {
       this.stories = response;
     } , (error) => {
       let alert = this.alertCtrl.create({
@@ -65,8 +33,10 @@ export class MainPage {
     });
   }
 
-  ionViewDidLoad() {
-    // console.log('ionViewDidLoad MainPage');
+  ionViewDidEnter() {
+    this.platform.ready().then(() => {
+      this.getUpdateStoriesFeed();
+    });
   }
 
   cutString(str) {
