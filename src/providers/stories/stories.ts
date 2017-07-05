@@ -30,15 +30,23 @@ export class StoriesProvider {
     return new Promise((resolve, reject) => {
       firebase.database().ref('/users/').once('value').then( (snapshot) => {
           var stories = [];
-          var user = firebase.auth().currentUser;
           var usersDistance = snapshot.val();
+          var user = firebase.auth().currentUser;
+          user = usersDistance[user.uid];
           for (var key in usersDistance)
           {
             var dist = Math.sqrt( Math.pow(user.lat - usersDistance[key].lat, 2) + Math.pow(user.lon - usersDistance[key].lon, 2));
             if (dist < 50)
             {
-              firebase.database().ref('/stories/' + usersDistance[key].uid).once('value').then( (snapshot) => {
-                stories.push({ id:snapshot.val().sid , name:snapshot.val().author, story:snapshot.val().story, distance: dist });
+              firebase.database().ref('/stories/' + usersDistance[key].uid + '/').once('value').then( (snapshot) => {
+                var userStories = snapshot.val();
+                if (userStories != null)
+                {
+                  for (var i in userStories)
+                  {
+                    stories.push({ id:userStories[i].sid , author:userStories[i].author, story:userStories[i].story, distance: dist });
+                  }
+                }
               }, (error) => {
                 reject(error.message);
               });
