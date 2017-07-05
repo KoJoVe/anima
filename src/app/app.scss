@@ -77,6 +77,8 @@ ion-item.clear-label {
 
 ion-item.clear-label .item-inner {
   border-bottom: 1px white solid !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
 }
 
 ion-item.clear-label .item-inner ion-label,
